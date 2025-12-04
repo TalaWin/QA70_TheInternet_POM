@@ -20,6 +20,7 @@ public class HomePageTest extends TestBase {
         home.openJavaScriptAlerts();
     }
 
+
     @Test
     public void userCanOpenNestedFramesPage() {
         driver.get("https://the-internet.herokuapp.com/");
