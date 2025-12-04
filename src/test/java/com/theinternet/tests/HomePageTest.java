@@ -4,24 +4,26 @@ import com.theinternet.pages.HomePage;
 import com.theinternet.tests.base.TestBase;
 import org.testng.annotations.Test;
 
-
-/**
- * Простой тест, который:
- * - открывает главную страницу (через TestBase)
- * - кликает по "Form Authentication" через POM
- */
 public class HomePageTest extends TestBase {
 
     @Test
     public void userCanOpenFormAuthenticationPage() {
-        // Создаём объект главной страницы и передаём туда driver
-        HomePage homePage = new HomePage(driver);
+        driver.get("https://the-internet.herokuapp.com/");
+        HomePage home = new HomePage(driver);
+        home.clickOnFormAuthentication();
+    }
 
-        // Кликаем по ссылке "Form Authentication"
-        homePage.clickOnFormAuthentication();
+    @Test
+    public void userCanOpenJavaScriptAlertsPage() {
+        driver.get("https://the-internet.herokuapp.com/");
+        HomePage home = new HomePage(driver);
+        home.openJavaScriptAlerts();
+    }
 
-        // Здесь потом добавим:
-        // - проверку URL
-        // - создание LoginPage и т.д.
+    @Test
+    public void userCanOpenNestedFramesPage() {
+        driver.get("https://the-internet.herokuapp.com/");
+        HomePage home = new HomePage(driver);
+        home.openNestedFrames();
     }
 }
