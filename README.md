@@ -1,128 +1,102 @@
-The Internet Project (POM + Selenium + TestNG)
-📌 Overview
+📌 HW-27 — Automated Tests for “File Upload” Page (the-internet.herokuapp.com)
 
-This project is an educational Page Object Model (POM) test framework built on
-Selenium + TestNG + Java + WebDriverManager.
+This homework implements automated tests for the File Upload functionality on
+https://the-internet.herokuapp.com/
 
-It uses the demo application:
-👉 https://the-internet.herokuapp.com/
-
-The goal of the project is to practice automation architecture,
-page navigation, JavaScript alerts handling, and working with nested frames.
+All tests navigate from the Home Page (as required) and validate the behavior of the upload component using different file types.
 
 📂 Project Structure
 ```
-src
-└── test/java/com.theinternet
+com/theinternet
 ├── pages
-│     ├── HomePage.java
-│     ├── JavaScriptAlertsPage.java
-│     ├── NestedFramesPage.java
-│     └── base/BasePage.java
+│   ├── HomePage.java
+│   ├── JavaScriptAlertsPage.java
+│   ├── NestedFramesPage.java
+│   ├── FileUploadPage.java
+│   └── base
+│       └── BasePage.java
 ├── tests
-│     ├── HomePageTest.java
-│     ├── JavaScriptAlertsTest.java
-│     ├── NestedFramesTest.java
-│     └── base/TestBase.java
+│   ├── HomePageTest.java
+│   ├── JavaScriptAlertsTest.java
+│   ├── NestedFramesTest.java
+│   ├── FileUploadTest.java
+│   └── base
+│       └── BaseTest.java
+└── tests
+    └── utils
+        └── FileHelper.java
+
+
 ```
 
-**BasePage**
+🧱 Implemented Functionality
 
-Contains all common UI actions:
-* click
-* type
-* scroll
-* getText
-* PageFactory initialization
+🔹 Page Objects
 
-**HomePage**
+**_HomePage_**
 
-Represents the main menu with navigation links:
+* Opens the File Upload page
+* Keeps navigation methods for other sections (e.g., JavaScript Alerts, Nested Frames)
+
+_**FileUploadPage**_
+
+* Upload file using standard file input
+* Read uploaded file name
+* Read page title (“File Uploaded!”)
+* Utility method for uploading in one step
+(uploadFile(path) → choose+submit)
+
+_**BasePage**_
+
+* click(element)
+* type(element, text)
+* getText(element)
+* Scroll helper
+* PageFactory initialization to avoid null elements
+
+**🧪 Implemented Tests**
+
+_**FileUploadTest**_
+* Upload .txt file
+* Upload .png file
+* Upload .jpg file
+
+_Each test validates:_
+* Correct navigation from homepage
+* Successful file upload
+* Uploaded file name displayed correctly
+* Header “File Uploaded!” appears
+
+**HomePageTest**
+
+_Confirms navigation from Home Page to important sections:_
 * Form Authentication
 * JavaScript Alerts
 * Nested Frames
+* File Upload
 
-Provides clean methods:
-openJavaScriptAlerts();
-openNestedFrames();
+**📄 Paths & Utilities**
 
-JavaScriptAlertsPage
+All test files are stored in:
+_src/test/resources/_
 
-Handles:
-* JS Alert
-* JS Confirm
-* JS Prompt
+File paths are resolved automatically using:
+_getFilePath("filename.ext");_
 
-Supports:
-* clicking each button
-* accepting/dismissing alerts
-* entering text into prompts
-* reading the result message
+via helper:
+_FileHelper.getResourceAbsolutePath();_
 
-NestedFramesPage
+🚀 How to Run Tests
 
-Implements switching between:
-* top → left
-* top → middle
-* top → right
-* bottom
+From IntelliJ:
+_Right-click → test folder → Run Tests_
 
-Each getter automatically switches back to default content.
+From Maven:
+_mvn test_
 
-🧪 Test Scenarios
-✔ JavaScript Alerts
+**🟢 Result**
 
-Located in: JavaScriptAlertsTest
-
-**_Covers:_**
-* Accepting JS Alert
-* Accepting JS Confirm
-* Canceling JS Confirm
-* Entering text into JS Prompt
-* Validating alert text
-
-**_Each test:_**
-1. Opens homepage
-2. Navigates via POM
-3. Calls page methods (no locators inside tests)
-
-**✔ Nested Frames**
-
-Located in: NestedFramesTest
-Covers:
-
-* Extract text from LEFT frame
-* Extract text from MIDDLE frame
-* Extract text from RIGHT frame
-* Extract text from BOTTOM frame
-Each frame has a dedicated getter method.
-
-**🔧 TestBase**
-
-Handles:
-
-* WebDriverManager setup
-* ChromeDriver configuration
-* Browser window maximizing
-* Implicit waits
-* Opening the main URL
-
-**▶️ How to Run Tests**
-
-* Clone the repository
-* Install Maven dependencies
-* Run via IntelliJ (TestNG plugin)
-or via console:
-mvn clean test
-
-**🎯 Purpose of the Project**
-
-This project is part of a training program and demonstrates:
-
-* Clean POM structure
-* Reusable page methods
-* Proper WebDriver handling
-* Navigation via HomePage
-* Real-world alert automation
-* Selenium frame switching techniques
-* Clean and readable TestNG tests
+All tests pass successfully:
+* File uploads work for txt / png / jpg
+* Page navigation works
+* Assertions validate the correct behavior

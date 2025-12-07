@@ -15,7 +15,6 @@ public class NestedFramesPage extends BasePage {
     public String getLeftFrameText() {
 
         driver.switchTo().frame("frame-top");
-
         driver.switchTo().frame("frame-left");
 
         String text = driver.findElement(By.tagName("body")).getText();
