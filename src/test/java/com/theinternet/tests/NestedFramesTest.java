@@ -2,11 +2,11 @@ package com.theinternet.tests;
 
 import com.theinternet.pages.HomePage;
 import com.theinternet.pages.NestedFramesPage;
-import com.theinternet.tests.base.TestBase;
+import com.theinternet.tests.base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class NestedFramesTest extends TestBase {
+public class NestedFramesTest extends BaseTest {
 
     private NestedFramesPage openNestedFramesPage() {
         driver.get("https://the-internet.herokuapp.com/");

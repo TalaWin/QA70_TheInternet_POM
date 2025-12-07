@@ -1,10 +1,10 @@
 package com.theinternet.tests;
 
 import com.theinternet.pages.HomePage;
-import com.theinternet.tests.base.TestBase;
+import com.theinternet.tests.base.BaseTest;
 import org.testng.annotations.Test;
 
-public class HomePageTest extends TestBase {
+public class HomePageTest extends BaseTest {
 
     @Test
     public void userCanOpenFormAuthenticationPage() {
